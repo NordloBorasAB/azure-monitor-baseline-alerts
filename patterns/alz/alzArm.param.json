@@ -127,9 +127,7 @@
       "value": [
         "Sev0",
         "Sev1",
-        "Sev2",
-        "Sev3",
-        "Sev4"
+        "Sev2"
       ]
     },
     "BYOActionGroup": {
@@ -1723,6 +1721,9 @@
         "HybridVMPercentCPUFailingPeriods": {
           "value": "1"
         },
+        "HybridVMPercentCPUEvaluationPeriods": {
+          "value": "4"
+        },
         "HybridVMPercentMemoryWindowSize": {
           "value": "PT15M"
         },
@@ -1758,6 +1759,9 @@
         },
         "HybridVMPercentMemoryFailingPeriods": {
           "value": "1"
+        },
+        "HybridVMPercentMemoryEvaluationPeriods": {
+          "value": "4"
         },
         "HybridVMDataDiskSpaceAlertSeverity": {
           "value": "2"
@@ -2934,7 +2938,10 @@
           "value": "Count"
         },
         "VMPercentCPUFailingPeriods": {
-          "value": "1"
+          "value": "4"
+        },
+        "VMPercentCPUEvaluationPeriods": {
+          "value": "4"
         },
         "VMPercentMemoryAlertSeverity": {
           "value": "2"
@@ -2973,7 +2980,10 @@
           "value": "Count"
         },
         "VMPercentMemoryFailingPeriods": {
-          "value": "1"
+          "value": "4"
+        },
+        "VMPercentMemoryEvaluationPeriods": {
+          "value": "4"
         },
         "VMDataDiskSpaceAlertSeverity": {
           "value": "2"
