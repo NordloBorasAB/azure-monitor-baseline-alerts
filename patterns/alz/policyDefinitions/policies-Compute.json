@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.34.44.8038",
-      "templateHash": "8637650220585566151"
+      "version": "0.36.1.42791",
+      "templateHash": "8151076613990156716"
     }
   },
   "parameters": {
@@ -1362,11 +1362,11 @@
             }
           },
           "VMPercentMemoryEvaluationPeriods": {
-           "type": "string",
-           "defaultValue": "1",
-           "metadata": {
-             "displayName": "VM Percent Memory Evaluation Periods",
-             "description": "Evaluation Periods for the alert"
+            "type": "string",
+            "defaultValue": "1",
+            "metadata": {
+              "displayName": "VM Percent Memory Evaluation Periods",
+              "description": "Evaluation Periods for the alert"
             }
           },
           "VMDataDiskSpaceAlertSeverity": {
@@ -2249,7 +2249,7 @@
                 "value": "[[[parameters('VMPercentCPUFailingPeriods')]"
               },
               "evaluationPeriods": {
-                "value": "[[[parameters('VMPercentCPUEvaluationPeriods')]"
+                "value": "[[[[parameters('VMPercentCPUEvaluationPeriods')]"
               },
               "alertResourceGroupName": {
                 "value": "[[[parameters('ALZMonitorResourceGroupName')]"
@@ -2315,7 +2315,7 @@
                 "value": "[[[parameters('VMPercentMemoryFailingPeriods')]"
               },
               "evaluationPeriods": {
-               "value": "[[[parameters('VMPercentMemoryEvaluationPeriods')]"
+                "value": "[[[[parameters('VMPercentMemoryEvaluationPeriods')]"
               },
               "alertResourceGroupName": {
                 "value": "[[[parameters('ALZMonitorResourceGroupName')]"

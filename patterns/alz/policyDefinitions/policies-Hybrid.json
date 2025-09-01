@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.34.44.8038",
-      "templateHash": "13727971443032984172"
+      "version": "0.36.1.42791",
+      "templateHash": "13406079267963468823"
     }
   },
   "parameters": {
@@ -2389,7 +2389,7 @@
                 "value": "[[[parameters('HybridVMPercentCPUFailingPeriods')]"
               },
               "evaluationPeriods": {
-                "value": "[[[parameters('HybridVMPercentCPUEvaluationPeriods')]"
+                "value": "[[[[parameters('HybridVMPercentCPUEvaluationPeriods')]"
               },
               "alertResourceGroupName": {
                 "value": "[[[parameters('ALZMonitorResourceGroupName')]"
@@ -2455,7 +2455,7 @@
                 "value": "[[[parameters('HybridVMPercentMemoryFailingPeriods')]"
               },
               "evaluationPeriods": {
-                "value": "[[[parameters('HybridVMPercentMemoryEvaluationPeriods')]"
+                "value": "[[[[parameters('HybridVMPercentMemoryEvaluationPeriods')]"
               },
               "alertResourceGroupName": {
                 "value": "[[[parameters('ALZMonitorResourceGroupName')]"
