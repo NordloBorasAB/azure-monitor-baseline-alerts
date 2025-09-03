@@ -2389,7 +2389,7 @@
                 "value": "[[[parameters('HybridVMPercentCPUFailingPeriods')]"
               },
               "evaluationPeriods": {
-                "value": "[[[[parameters('HybridVMPercentCPUEvaluationPeriods')]"
+                "value": "[[[parameters('HybridVMPercentCPUEvaluationPeriods')]"
               },
               "alertResourceGroupName": {
                 "value": "[[[parameters('ALZMonitorResourceGroupName')]"
@@ -2455,7 +2455,7 @@
                 "value": "[[[parameters('HybridVMPercentMemoryFailingPeriods')]"
               },
               "evaluationPeriods": {
-                "value": "[[[[parameters('HybridVMPercentMemoryEvaluationPeriods')]"
+                "value": "[[[parameters('HybridVMPercentMemoryEvaluationPeriods')]"
               },
               "alertResourceGroupName": {
                 "value": "[[[parameters('ALZMonitorResourceGroupName')]"
