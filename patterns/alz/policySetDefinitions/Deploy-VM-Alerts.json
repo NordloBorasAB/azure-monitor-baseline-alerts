@@ -2129,7 +2129,11 @@
             "value": "[[parameters('VMPercentCPUFailingPeriods')]"
           },
           "evaluationPeriods": {
+<<<<<<< HEAD
             "value": "[[parameters('VMPercentCPUEvaluationPeriods')]"
+=======
+            "value": "[[[parameters('VMPercentCPUEvaluationPeriods')]"
+>>>>>>> 1b869371d880b422f4ed83afa3763b24d68dea4f
           },
           "alertResourceGroupName": {
             "value": "[[parameters('ALZMonitorResourceGroupName')]"
@@ -2195,7 +2199,11 @@
             "value": "[[parameters('VMPercentMemoryFailingPeriods')]"
           },
           "evaluationPeriods": {
+<<<<<<< HEAD
             "value": "[[parameters('VMPercentMemoryEvaluationPeriods')]"
+=======
+            "value": "[[[parameters('VMPercentMemoryEvaluationPeriods')]"
+>>>>>>> 1b869371d880b422f4ed83afa3763b24d68dea4f
           },
           "alertResourceGroupName": {
             "value": "[[parameters('ALZMonitorResourceGroupName')]"
