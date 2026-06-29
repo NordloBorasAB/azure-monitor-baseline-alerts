@@ -143,6 +143,13 @@
     "Tags": {
       "type": "object",
       "defaultValue": {}
+    },
+    "AutomationAccountPublicNetworkAccess": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Controls public network access on the Automation Account. Disabled is recommended."
+      }
     }
   },
   "variables": {
@@ -2382,6 +2389,9 @@
           "tags": "[if(contains(parameters('Tags'), 'Microsoft.Automation/automationAccounts'), createObject('value', parameters('Tags')['Microsoft.Automation/automationAccounts']), createObject('value', createObject()))]",
           "systemAssignedIdentity": {
             "value": true
+          },
+          "publicNetworkAccess": {
+            "value": "[if(parameters('AutomationAccountPublicNetworkAccess'), 'Enabled', 'Disabled')]"
           }
         },
         "template": {
@@ -2700,7 +2710,7 @@
                   "name": "[parameters('skuName')]"
                 },
                 "encryption": "[if(not(empty(parameters('cMKKeyName'))), createObject('keySource', 'Microsoft.KeyVault', 'identity', createObject('userAssignedIdentity', parameters('cMKUserAssignedIdentityResourceId')), 'keyVaultProperties', createObject('keyName', parameters('cMKKeyName'), 'keyVaultUri', reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', split(parameters('cMKKeyVaultResourceId'), '/')[2], split(parameters('cMKKeyVaultResourceId'), '/')[4]), 'Microsoft.KeyVault/vaults', last(split(parameters('cMKKeyVaultResourceId'), '/'))), '2021-10-01').vaultUri, 'keyVersion', if(not(empty(parameters('cMKKeyVersion'))), parameters('cMKKeyVersion'), last(split(reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', split(parameters('cMKKeyVaultResourceId'), '/')[2], split(parameters('cMKKeyVaultResourceId'), '/')[4]), 'Microsoft.KeyVault/vaults/keys', split(format('{0}/{1}', last(split(parameters('cMKKeyVaultResourceId'), '/')), parameters('cMKKeyName')), '/')[0], split(format('{0}/{1}', last(split(parameters('cMKKeyVaultResourceId'), '/')), parameters('cMKKeyName')), '/')[1]), '2021-10-01').keyUriWithVersion, '/'))))), null())]",
-                "publicNetworkAccess": "[if(not(empty(parameters('publicNetworkAccess'))), if(equals(parameters('publicNetworkAccess'), 'Disabled'), false(), true()), if(not(empty(parameters('privateEndpoints'))), false(), null()))]",
+                "publicNetworkAccess": "[if(equals(parameters('publicNetworkAccess'), 'Disabled'), false(), true())]",
                 "disableLocalAuth": "[parameters('disableLocalAuth')]"
               }
             },

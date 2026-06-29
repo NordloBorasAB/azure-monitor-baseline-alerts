@@ -79,6 +79,27 @@
               }
             },
             {
+              "name": "AutomationAccountPublicNetworkAccess",
+              "type": "Microsoft.Common.DropDown",
+              "label": "Automation Account Public Network Access",
+              "defaultValue": "Disabled",
+              "toolTip": "Controls whether the Automation Account allows public network access. Disabled is recommended and required in environments with Azure Policy enforcing private endpoints.",
+              "constraints": {
+                "required": true,
+                "allowedValues": [
+                  {
+                    "label": "Disabled",
+                    "value": false
+                  },
+                  {
+                    "label": "Enabled",
+                    "value": true
+                  }
+                ]
+              },
+              "visible": true
+            },
+            {
               "name": "CustomScriptInfo",
               "type": "Microsoft.Common.Section",
               "label": "Custom Script Information",
@@ -525,6 +546,7 @@
         "_ArtifactsLocation": "[steps('AlertsConfig').CustomScriptInfo._ArtifactsLocation]",
         "_ArtifactsLocationSasToken": "[steps('AlertsConfig').CustomScriptInfo._ArtifactsLocationSasToken]",
         "optoutTelemetry": "[steps('AlertsConfig').optoutTelemetry]",
+        "AutomationAccountPublicNetworkAccess": "[steps('AlertsConfig').AutomationAccountPublicNetworkAccess]",
         "AlertNamePrefix": "[steps('AlertsConfig').AlertNamePrefix]",
         "AllResourcesSameRG": "[if(steps('AlertsConfig').optionVMMetrics, false, true)]",
         "AutoResolveAlert": "[steps('AlertsConfig').AutoResolveAlert]",
