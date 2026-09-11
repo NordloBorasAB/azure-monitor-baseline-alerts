@@ -143,13 +143,6 @@
     "Tags": {
       "type": "object",
       "defaultValue": {}
-    },
-    "AutomationAccountPublicNetworkAccess": {
-      "type": "bool",
-      "defaultValue": false,
-      "metadata": {
-        "description": "Controls public network access on the Automation Account. Disabled is recommended."
-      }
     }
   },
   "variables": {
@@ -1163,8 +1156,8 @@
     ],
     "LogAlertsStorage": [
       {
-        "name": "[format('{0}-StorLowSpaceAzFile-15PrcntRem', parameters('AlertNamePrefix'))]",
-        "displayName": "[format('{0}-Storage-Low Space on Azure File Share-15 Percent Remaining', parameters('AlertNamePrefix'))]",
+        "name": "[format('{0}-StorLowSpaceAzFile-15PrcntRem', parameters('AlertNamePrefix', uniqueString(subscription().displayName)))]",
+        "displayName": "[format('{0}-Storage-Low Space on Azure File Share-15 Percent Remaining', parameters('AlertNamePrefix', uniqueString(subscription().displayName)))]",
         "description": "[format('{0}This alert is based on the Action Account and Runbook that populates the Log Analytics specificed with the AVD Metrics Deployment Solution.\nNOTE: The Runbook will FAIL if Networking for the storage account has anything other than \"Enabled from all networks\"\n-->Last Number in the string is the Percentage Remaining for the Share.\nOutput: ResultsDescription\nStorageType,Subscription,ResourceGroup,StorageAccount,ShareName,Quota,GBUsed,PercentRemaining', variables('AlertDescriptionHeader'))]",
         "severity": 2,
         "evaluationFrequency": "PT10M",
@@ -1203,8 +1196,8 @@
         }
       },
       {
-        "name": "[format('{0}-StorLowSpaceAzFile-5PrcntRem', parameters('AlertNamePrefix'))]",
-        "displayName": "[format('{0}-Storage-Low Space on Azure File Share-5 Percent Remaining', parameters('AlertNamePrefix'))]",
+        "name": "[format('{0}-StorLowSpaceAzFile-5PrcntRem', parameters('AlertNamePrefix', uniqueString(subscription().displayName)))]",
+        "displayName": "[format('{0}-Storage-Low Space on Azure File Share-5 Percent Remaining', parameters('AlertNamePrefix', uniqueString(subscription().displayName)))]",
         "description": "[format('{0}This alert is based on the Action Account and Runbook that populates the Log Analytics specificed with the AVD Metrics Deployment Solution.\nNOTE: The Runbook will FAIL if Networking for the storage account has anything other than \"Enabled from all networks\"\n-->Last Number in the string is the Percentage Remaining for the Share.\nOutput: ResultsDescription\nStorageType,Subscription,ResourceGroup,StorageAccount,ShareName,Quota,GBUsed,PercentRemaining', variables('AlertDescriptionHeader'))]",
         "severity": 1,
         "evaluationFrequency": "PT10M",
@@ -2389,9 +2382,6 @@
           "tags": "[if(contains(parameters('Tags'), 'Microsoft.Automation/automationAccounts'), createObject('value', parameters('Tags')['Microsoft.Automation/automationAccounts']), createObject('value', createObject()))]",
           "systemAssignedIdentity": {
             "value": true
-          },
-          "publicNetworkAccess": {
-            "value": "[if(parameters('AutomationAccountPublicNetworkAccess'), 'Enabled', 'Disabled')]"
           }
         },
         "template": {
@@ -2710,7 +2700,7 @@
                   "name": "[parameters('skuName')]"
                 },
                 "encryption": "[if(not(empty(parameters('cMKKeyName'))), createObject('keySource', 'Microsoft.KeyVault', 'identity', createObject('userAssignedIdentity', parameters('cMKUserAssignedIdentityResourceId')), 'keyVaultProperties', createObject('keyName', parameters('cMKKeyName'), 'keyVaultUri', reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', split(parameters('cMKKeyVaultResourceId'), '/')[2], split(parameters('cMKKeyVaultResourceId'), '/')[4]), 'Microsoft.KeyVault/vaults', last(split(parameters('cMKKeyVaultResourceId'), '/'))), '2021-10-01').vaultUri, 'keyVersion', if(not(empty(parameters('cMKKeyVersion'))), parameters('cMKKeyVersion'), last(split(reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', split(parameters('cMKKeyVaultResourceId'), '/')[2], split(parameters('cMKKeyVaultResourceId'), '/')[4]), 'Microsoft.KeyVault/vaults/keys', split(format('{0}/{1}', last(split(parameters('cMKKeyVaultResourceId'), '/')), parameters('cMKKeyName')), '/')[0], split(format('{0}/{1}', last(split(parameters('cMKKeyVaultResourceId'), '/')), parameters('cMKKeyName')), '/')[1]), '2021-10-01').keyUriWithVersion, '/'))))), null())]",
-                "publicNetworkAccess": "[if(equals(parameters('publicNetworkAccess'), 'Disabled'), false(), true())]",
+                "publicNetworkAccess": "[if(not(empty(parameters('publicNetworkAccess'))), if(equals(parameters('publicNetworkAccess'), 'Disabled'), false(), true()), if(not(empty(parameters('privateEndpoints'))), false(), null()))]",
                 "disableLocalAuth": "[parameters('disableLocalAuth')]"
               }
             },
